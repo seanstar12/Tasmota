@@ -264,6 +264,7 @@ enum SupportedModules {
   SK03_TUYA,
   PS_16_DZ,
   TECKIN_US,
+  MJ_SD01_DIMMER,
   MAXMODULE };
 
 /********************************************************************************************/
@@ -498,6 +499,7 @@ const uint8_t kModuleNiceList[MAXMODULE] PROGMEM = {
   TUYA_DIMMER,        // Dimmer Devices
   ARMTRONIX_DIMMERS,
   PS_16_DZ,
+  MJ_SD01_DIMMER,
   H801,               // Light Devices
   MAGICHOME,
   ARILUX_LC01,
@@ -1319,7 +1321,22 @@ const mytmplt kModules[MAXMODULE] PROGMEM = {
      GPIO_KEY1,        // GPIO13 Button
      GPIO_NRG_CF1,     // GPIO14 BL0937 or HJL-01 CF1 current / voltage
      0, 0, 0
-  }
+  },
+   { "MJ-SD01 Dimmer",    // Martin Jerry SD-01 Dimmer Switch
+     GPIO_SWT3,        // GPIO00 Up Button
+     GPIO_SWT2,        // GPIO01 Down Button
+     GPIO_USER,        // GPIO02 
+     0,                // GPIO03 Dimmer Level 5 LED(inv)
+     GPIO_LED1_INV,    // GPIO04 Red LED behind button1(inv)    
+     0,                // GPIO05 Dimmer Level 4 LED(inv)
+     0, 0, 0, 0, 0, 0, // Flash connection
+     0,                // GPIO12 Dimmer Level 3 LED(inv)
+     GPIO_PWM1,        // GPIO13 PWM1 Signal sent to dimming MCU
+     0,                // GPIO14 Dimmer Level 2 LED(inv)
+     GPIO_SWT1,        // GPIO15 On/Off Button (0 = Off, 1 = On)   
+     0,                // GPIO16 Dimming MCU ON/OFF State - also tied to Dimmer LED Level 1 and Blue LED on On/Off Button
+     0
+  }   
 };
 
 /*

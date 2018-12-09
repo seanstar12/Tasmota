@@ -347,6 +347,9 @@ void MqttPublishPowerState(byte device)
     GetPowerDevice(scommand, device, sizeof(scommand), Settings.flag.device_index_enable);
     GetTopic_P(stopic, STAT, mqtt_topic, (Settings.flag.mqtt_response) ? scommand : S_RSLT_RESULT);
     snprintf_P(mqtt_data, sizeof(mqtt_data), S_JSON_COMMAND_SVALUE, scommand, GetStateText(bitRead(power, device -1)));
+    if ((Settings.module == MJ_SD01_DIMMER) || (Settings.module == TUYA_DIMMER)) {
+      LightState(0);
+    }
     MqttPublish(stopic);
 
     GetTopic_P(stopic, STAT, mqtt_topic, scommand);

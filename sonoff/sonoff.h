@@ -30,7 +30,7 @@
  * Default sensor states
 \*********************************************************************************************/
 
-#define CODE_IMAGE 0
+#define CODE_IMAGE 7
 
 #define USE_DHT                             // Default DHT11 sensor needs no external library
 #define USE_ENERGY_SENSOR                   // Use energy sensors (+14k code)

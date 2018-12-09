@@ -391,6 +391,13 @@ void LightInit(void)
         digitalWrite(pin[GPIO_LED2], bitRead(led_inverted, 1));  // Turn off RF
       }
     }
+    if (Settings.module == MJ_SD01_DIMMER) {   // setup GPIO for dimming status on faceplate
+      pinMode(3, OUTPUT);
+      pinMode(5, OUTPUT);
+      pinMode(12, OUTPUT);
+      pinMode(14, OUTPUT);
+      pinMode(16, OUTPUT);
+    }
   }
 #ifdef USE_WS2812  // ************************************************************************
   else if (LT_WS2812 == light_type) {
@@ -615,11 +622,11 @@ void LightPreparePower(void)
 {
   if (Settings.light_dimmer && !(light_power)) {
     if (!Settings.flag.not_power_linked) {
-      ExecuteCommandPower(light_device, POWER_ON_NO_STATE, SRC_LIGHT);
+      ExecuteCommandPower(light_device, POWER_ON, SRC_LIGHT);  // changed from POWER_ON_NO_STATE as we want the state
     }
   }
   else if (!Settings.light_dimmer && light_power) {
-    ExecuteCommandPower(light_device, POWER_OFF_NO_STATE, SRC_LIGHT);
+    ExecuteCommandPower(light_device, POWER_OFF, SRC_LIGHT);   // changed from POWER_OFF_NO_STATE as we want the state
   }
 #ifdef USE_DOMOTICZ
   DomoticzUpdatePowerState(light_device);
@@ -721,6 +728,13 @@ void LightSetPower(void)
   }
   if (light_power) {
     light_update = 1;
+    if (Settings.module == MJ_SD01_DIMMER) {   // adjust GPIO16 to turn on/off MCU power
+      digitalWrite(16,LOW);
+    } 
+  } else {
+    if (Settings.module == MJ_SD01_DIMMER) {   // adjust GPIO16 to turn on/off MCU power
+      digitalWrite(16,HIGH);
+    } 
   }
   LightAnimate();
 }
@@ -851,7 +865,43 @@ void LightAnimate(void)
         PS16DZSerialDuty(cur_col[0]);
       }
 #endif  // USE_PS_16_DZ
-
+      if (Settings.module == MJ_SD01_DIMMER) {   // adjust display LEDs
+        switch (cur_col[0]) {
+          case 0 ... 50:
+            digitalWrite(14, HIGH);
+            digitalWrite(12, HIGH);
+            digitalWrite(5, HIGH);
+            digitalWrite(3, HIGH);
+            break;
+          case 51 ... 101:
+            digitalWrite(14, LOW);
+            digitalWrite(12, HIGH);
+            digitalWrite(5, HIGH);
+            digitalWrite(3, HIGH);
+            break;
+          case 102 ... 152:
+            digitalWrite(14, LOW);
+            digitalWrite(12, LOW);
+            digitalWrite(5, HIGH);
+            digitalWrite(3, HIGH);
+            break;
+          case 153 ... 203:
+            digitalWrite(14, LOW);
+            digitalWrite(12, LOW);
+            digitalWrite(5, LOW);
+            digitalWrite(3, HIGH);
+            break;
+          case 204 ... 255:
+            digitalWrite(14, LOW);
+            digitalWrite(12, LOW);
+            digitalWrite(5, LOW);
+            digitalWrite(3, LOW);
+            break;
+          // default: 
+          //   // no match
+          //   break;
+        }
+      }
     }
   }
 }
