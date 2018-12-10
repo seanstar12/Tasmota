@@ -2540,6 +2540,9 @@ void GpioInit(void)
     devices_present = 0;
     baudrate = 19200;
   }
+    else if (MJ_SD01_DIMMER == Settings.module) {
+    Settings.flag.mqtt_serial = 0;
+  }
   else if (SONOFF_BN == Settings.module) {   // PWM Single color led (White)
     light_type = LT_PWM1;
   }
