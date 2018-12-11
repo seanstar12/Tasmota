@@ -1,4 +1,43 @@
-## Sonoff-Tasmota
+## Sonoff-Tasmota - digiDIM Temporary Fork @ 6.3.0.16
+
+Precompiled bins supplied in the bins folder of this repo.
+
+### Changes
+
+Dimming status sent at all power state changes 
+Power topic updated if a dimming change causes the power state to change
+Martin Jerry SD-01 Dimmer support
+digiDIMv(X) indicated in the information tab for support purposes
+
+I personally use this build on Tuya based dimmers and the Martin Jerry SD-01 Dimmer in our home with Home Assistant.
+
+[Martin Jerry SD-01 Dimmer](https://amzn.to/2L8XeFS)
+
+[Lesim Dimmer with Number Display](https://amzn.to/2EetlT1)
+
+[Oittm/Lopoo Dimmer with Touch Panel](https://amzn.to/2rxLOCK)
+
+[Moes Dimmer similar to the Oittm but possibly ships to additional countries](https://amzn.to/2QKyKrP)
+
+
+## Martin Jerry SD-01 Dimmer Setup
+
+Unplug the faceplate from the rear dimming module until you are ready to connect it to mains power!  Do not connect the USB flasher to the faceplate while mains power is applied to the unit!  The magic smoke will come out or worse!
+
+Solder the wires for flashing like you normally would for a Tuya module flash.  You do not need to solder GPIO 0 as the UP button is also GPIO 0, simply hold this button up during boot.  
+
+Once you have the device connected to your WiFi and MQTT broker, change the module type to the MJ-SD01 Dimmer.  Let the device reboot and issue the following backlog on the console.  Make sure every command takes effect:
+
+backlog rule1 on switch3#state=2 do dimmer + endon on switch2#state=2 do dimmer - endon on switch2#state=3 do dimmer 20 endon on switch3#state=3 do dimmer 100 endon; rule1 1; setoption32 10; switchmode1 6; switchmode2 5; switchmode3 5
+
+Optional Rule for ON/OFF long press to send an MQTT toggle message to another switch/topic (example):
+rule2 on switch1#state=3 do publish Table-Dimmer/Main TOGGLE endon
+rule2 1
+
+In the rule1 you can change the "do dimmer 20" section to any value you like, a long press of down will set dimmer to 20%, a long press up will set the dimmer to 100%.  Modify these to your needs.
+
+--------
+
 
 Alternative firmware for _ESP8266 based devices_ like [iTead](https://www.itead.cc/) _**Sonoff**_ with **web**, **timers**, 'Over The Air' (**OTA**) firmware updates and **sensors support**, allowing control under **Serial**, **HTTP**, **MQTT** and **KNX**, so as to be used on **Smart Home Systems**. Written for Arduino IDE and PlatformIO.
 
