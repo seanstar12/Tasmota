@@ -4,10 +4,10 @@ Precompiled bins supplied in the bins folder of this repo.
 
 ### Changes
 
-Dimming status sent at all power state changes 
-Power topic updated if a dimming change causes the power state to change
-Martin Jerry SD-01 Dimmer support
-digiDIMv(X) indicated in the information tab for support purposes
+- Dimming status sent at all power state changes 
+- Power topic updated if a dimming change causes the power state to change
+- Martin Jerry SD-01 Dimmer support
+- digiDIMv(X) indicated in the information tab for support purposes
 
 I personally use this build on Tuya based dimmers and the Martin Jerry SD-01 Dimmer in our home with Home Assistant.
 
