@@ -15,9 +15,9 @@ I personally use this build on Tuya based dimmers and the Martin Jerry SD-01 Dim
 
 [Lesim Dimmer with Number Display](https://amzn.to/2EetlT1)
 
-[Oittm/Lopoo Dimmer with Touch Panel](https://amzn.to/2rxLOCK)
+[Oittm/Lopoo Dimmer with Touch Panel](https://amzn.to/2Uufrls)
 
-[Moes Dimmer similar to the Oittm but possibly ships to additional countries](https://amzn.to/2QKyKrP)
+[Moes Dimmer similar to the Oittm but possibly ships to additional countries](https://amzn.to/2PvO1bm)
 
 
 ## Martin Jerry SD-01 Dimmer Setup
