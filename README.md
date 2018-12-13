@@ -36,7 +36,29 @@ rule2 1
 
 In the rule1 you can change the "do dimmer 20" section to any value you like, a long press of down will set dimmer to 20%, a long press up will set the dimmer to 100%.  Modify these to your needs.
 
+NOTE: In the future, when you are preparing to flash a stock build of Tasmota to the MJ-SD01 Dimmer, select the Generic template first before flashing to prevent a possible conflict with another device template.
+
 --------
+
+## Sample Configuration YAML Code
+
+```yaml
+- platform: mqtt
+  name: "TuyaTest"
+  state_topic: "stat/TuyaTest/POWER"
+  command_topic: "cmnd/TuyaTest/POWER"
+  availability_topic: "tele/TuyaTest/LWT"
+  brightness_state_topic: "stat/TuyaTest/RESULT"
+  brightness_command_topic: "cmnd/TuyaTest/Dimmer"
+  brightness_scale: 100
+  brightness_value_template: "{{ value_json.Dimmer }}"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+  retain: false
+```
 
 
 Alternative firmware for _ESP8266 based devices_ like [iTead](https://www.itead.cc/) _**Sonoff**_ with **web**, **timers**, 'Over The Air' (**OTA**) firmware updates and **sensors support**, allowing control under **Serial**, **HTTP**, **MQTT** and **KNX**, so as to be used on **Smart Home Systems**. Written for Arduino IDE and PlatformIO.
