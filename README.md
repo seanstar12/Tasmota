@@ -38,6 +38,10 @@ In the rule1 you can change the "do dimmer 20" section to any value you like, a 
 
 NOTE: In the future, when you are preparing to flash a stock build of Tasmota to the MJ-SD01 Dimmer, select the Generic template first before flashing to prevent a possible conflict with another device template.
 
+BONUS: Want the Red LED on while the light is off?  Run this rule:
+Rule3 on power1#state=1 do ledpower 0 endon on power1#state=0 do ledpower 1 endon
+Rule3 1
+
 --------
 
 ## Sample Configuration YAML Code
