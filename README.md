@@ -9,7 +9,7 @@ Precompiled bins supplied in the bins folder of this repo.
 - Martin Jerry SD-01 Dimmer support
 - digiDIMv(X) indicated in the information tab for support purposes
 
-I personally use this build on Tuya based dimmers and the Martin Jerry SD-01 Dimmer in our home with Home Assistant.
+I personally use this build on Tuya based dimmers and the Martin Jerry SD-01 Dimmer in our home with Home Assistant. Shown here: https://www.digiblur.com/2018/12/state-of-dimmer-tasmota-dimmer-updates.html
 
 ## Martin Jerry SD-01 Dimmer Setup
 
