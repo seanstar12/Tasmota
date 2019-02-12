@@ -29,11 +29,13 @@ Once you have the device connected to your WiFi and MQTT broker, change the modu
 
 backlog rule1 on switch3#state=2 do dimmer + endon on switch2#state=2 do dimmer - endon on switch2#state=3 do dimmer 20 endon on switch3#state=3 do dimmer 100 endon; rule1 1; setoption32 10; switchmode1 6; switchmode2 5; switchmode3 5
 
+Once the switch reboots.  Issue a switchmode3 command and make sure it comes back as a setting of "5".  This will verify all of the above backlog commands went through correctly.  If you do not see switchmode3 set to 5, you can issue each of the backlog commands separately one at a time and watch them go through.
+
+In the rule1 you can change the "do dimmer 20" section to any value you like, a long press of down will set dimmer to 20%, a long press up will set the dimmer to 100%.  Modify these to your needs.
+
 Optional Rule for ON/OFF long press to send an MQTT toggle message to another switch/topic (example):  
 rule2 on switch1#state=3 do publish Table-Dimmer/Main TOGGLE endon    
 rule2 1
-
-In the rule1 you can change the "do dimmer 20" section to any value you like, a long press of down will set dimmer to 20%, a long press up will set the dimmer to 100%.  Modify these to your needs.
 
 NOTE: In the future, when you are preparing to flash a stock build of Tasmota to the MJ-SD01 Dimmer, select the Generic template first before flashing to prevent a possible conflict with another device template.
 
