@@ -50,7 +50,7 @@
 #define PROJECT                "sonoff"          // PROJECT is used as the default topic delimiter
 
 // If not selected the default will be SONOFF_BASIC
-//#define MODULE                 SONOFF_BASIC      // [Module] Select default model from sonoff_template.h
+#define MODULE                 WEMOS      // [Module] Select default model from sonoff_template.h
 
 #define SAVE_DATA              1                 // [SaveData] Save changed parameters to Flash (0 = disable, 1 - 3600 seconds)
 #define SAVE_STATE             1                 // [SetOption0] Save changed power state to Flash (0 = disable, 1 = enable)
@@ -65,9 +65,9 @@
 #define STA_PASS1              ""                // [Password1] Wifi password
 #define STA_SSID2              ""                // [Ssid2] Optional alternate AP Wifi SSID
 #define STA_PASS2              ""                // [Password2] Optional alternate AP Wifi password
-#define WIFI_CONFIG_TOOL       WIFI_RETRY        // [WifiConfig] Default tool if wifi fails to connect
+#define WIFI_CONFIG_TOOL       WIFI_MANAGER        // [WifiConfig] Default tool if wifi fails to connect
                                                  //   (WIFI_RESTART, WIFI_SMARTCONFIG, WIFI_MANAGER, WIFI_WPSCONFIG, WIFI_RETRY, WIFI_WAIT, WIFI_SERIAL)
-#define WIFI_CONFIG_NO_SSID    WIFI_WPSCONFIG    // Default tool if wifi fails to connect and no SSID is configured
+#define WIFI_CONFIG_NO_SSID    WIFI_MANAGER    // Default tool if wifi fails to connect and no SSID is configured
                                                  //   (WIFI_SMARTCONFIG, WIFI_MANAGER, WIFI_WPSCONFIG, WIFI_SERIAL)
                                                  //   *** NOTE: When WPS is disabled by USE_WPS below, WIFI_WPSCONFIG will execute WIFI_MANAGER ***
                                                  //   *** NOTE: When WIFI_MANAGER is disabled by USE_WEBSERVER below, WIFI_MANAGER will execute WIFI_SMARTCONFIG ***
@@ -94,7 +94,7 @@
 #define MQTT_PASS              "DVES_PASS"       // [MqttPassword] MQTT password
 
 #define MQTT_BUTTON_RETAIN     0                 // [ButtonRetain] Button may send retain flag (0 = off, 1 = on)
-#define MQTT_POWER_RETAIN      0                 // [PowerRetain] Power status message may send retain flag (0 = off, 1 = on)
+#define MQTT_POWER_RETAIN      1                 // [PowerRetain] Power status message may send retain flag (0 = off, 1 = on)
 #define MQTT_SWITCH_RETAIN     0                 // [SwitchRetain] Switch may send retain flag (0 = off, 1 = on)
 #define MQTT_BUTTON_SWITCH_FORCE_LOCAL     0     // [SetOption61] Force local operation when button/switch topic is set (0 = off, 1 = on)
 
@@ -136,8 +136,8 @@
 
 // -- Time - Up to three NTP servers in your region
 #define NTP_SERVER1            "pool.ntp.org"       // [NtpServer1] Select first NTP server by name or IP address (129.250.35.250)
-#define NTP_SERVER2            "nl.pool.ntp.org"    // [NtpServer2] Select second NTP server by name or IP address (5.39.184.5)
-#define NTP_SERVER3            "0.nl.pool.ntp.org"  // [NtpServer3] Select third NTP server by name or IP address (93.94.224.67)
+#define NTP_SERVER2            "us.pool.ntp.org"    // [NtpServer2] Select second NTP server by name or IP address (5.39.184.5)
+#define NTP_SERVER3            "0.us.pool.ntp.org"  // [NtpServer3] Select third NTP server by name or IP address (93.94.224.67)
 
 // -- Time - Start Daylight Saving Time and timezone offset from UTC in minutes
 #define TIME_DST_HEMISPHERE    North             // [TimeDst] Hemisphere (0 or North, 1 or South)
@@ -236,9 +236,9 @@
 #define MQTT_TELE_RETAIN     0                   // Tele messages may send retain flag (0 = off, 1 = on)
 
 // -- MQTT - Domoticz -----------------------------
-#define USE_DOMOTICZ                             // Enable Domoticz (+6k code, +0.3k mem)
-  #define DOMOTICZ_IN_TOPIC    "domoticz/in"     // Domoticz Input Topic
-  #define DOMOTICZ_OUT_TOPIC   "domoticz/out"    // Domoticz Output Topic
+//#define USE_DOMOTICZ                             // Enable Domoticz (+6k code, +0.3k mem)
+//  #define DOMOTICZ_IN_TOPIC    "domoticz/in"     // Domoticz Input Topic
+//  #define DOMOTICZ_OUT_TOPIC   "domoticz/out"    // Domoticz Output Topic
 
 // -- MQTT - Home Assistant Discovery -------------
 #define USE_HOME_ASSISTANT                       // Enable Home Assistant Discovery Support (+2k code)
@@ -250,7 +250,7 @@
 
 // -- KNX IP Protocol -----------------------------
 //#define USE_KNX                                  // Enable KNX IP Protocol Support (+9.4k code, +3k7 mem)
-  #define USE_KNX_WEB_MENU                       // Enable KNX WEB MENU (+8.3k code, +144 mem)
+//  #define USE_KNX_WEB_MENU                       // Enable KNX WEB MENU (+8.3k code, +144 mem)
 
 // -- HTTP ----------------------------------------
 #define USE_WEBSERVER                            // Enable web server and Wifi Manager (+66k code, +8k mem)
@@ -278,11 +278,11 @@
 // -- One wire sensors ----------------------------
                                                  // WARNING: Select none for default one DS18B20 sensor or enable one of the following two options for multiple sensors
 //#define USE_DS18x20_LEGACY                       // Optional for more than one DS18x20 sensors with dynamic scan using library OneWire (+1k5 code)
-#define USE_DS18x20                              // Optional for more than one DS18x20 sensors with id sort, single scan and read retry (+1k3 code)
+//#define USE_DS18x20                              // Optional for more than one DS18x20 sensors with id sort, single scan and read retry (+1k3 code)
 //  #define W1_PARASITE_POWER                      // If using USE_DS18x20 then optimize for parasite powered sensors
 
 // -- I2C sensors ---------------------------------
-#define USE_I2C                                  // I2C using library wire (+10k code, 0k2 mem, 124 iram)
+//#define USE_I2C                                  // I2C using library wire (+10k code, 0k2 mem, 124 iram)
 
 #ifdef USE_I2C
   #define USE_SHT                                // Enable SHT1X sensor (+1k4 code)
@@ -346,56 +346,56 @@
 #endif  // USE_SPI
 
 // -- Serial sensors ------------------------------
-#define USE_MHZ19                                // Add support for MH-Z19 CO2 sensor (+2k code)
-#define USE_SENSEAIR                             // Add support for SenseAir K30, K70 and S8 CO2 sensor (+2k3 code)
-  #define CO2_LOW              800               // Below this CO2 value show green light (needs PWM or WS2812 RG(B) led and enable with SetOption18 1)
-  #define CO2_HIGH             1200              // Above this CO2 value show red light (needs PWM or WS2812 RG(B) led and enable with SetOption18 1)
-#define USE_PMS5003                              // Add support for PMS5003 and PMS7003 particle concentration sensor (+1k3 code)
-#define USE_NOVA_SDS                             // Add support for SDS011 and SDS021 particle concentration sensor (+0k7 code)
-  #define WORKING_PERIOD       5                 // Working period of the SDS Sensor, Takes a reading every X Minutes
-#define USE_SERIAL_BRIDGE                        // Add support for software Serial Bridge (+0k8 code)
+//#define USE_MHZ19                                // Add support for MH-Z19 CO2 sensor (+2k code)
+//#define USE_SENSEAIR                             // Add support for SenseAir K30, K70 and S8 CO2 sensor (+2k3 code)
+//  #define CO2_LOW              800               // Below this CO2 value show green light (needs PWM or WS2812 RG(B) led and enable with SetOption18 1)
+//  #define CO2_HIGH             1200              // Above this CO2 value show red light (needs PWM or WS2812 RG(B) led and enable with SetOption18 1)
+//#define USE_PMS5003                              // Add support for PMS5003 and PMS7003 particle concentration sensor (+1k3 code)
+//#define USE_NOVA_SDS                             // Add support for SDS011 and SDS021 particle concentration sensor (+0k7 code)
+//  #define WORKING_PERIOD       5                 // Working period of the SDS Sensor, Takes a reading every X Minutes
+//#define USE_SERIAL_BRIDGE                        // Add support for software Serial Bridge (+0k8 code)
 //#define USE_SDM120                               // Add support for Eastron SDM120-Modbus energy meter (+1k7 code)
-  #define SDM120_SPEED         9600              // SDM120-Modbus RS485 serial speed (default: 2400 baud)
+//  #define SDM120_SPEED         9600              // SDM120-Modbus RS485 serial speed (default: 2400 baud)
 //#define USE_SDM630                               // Add support for Eastron SDM630-Modbus energy meter (+2k code)
-  #define SDM630_SPEED         9600              // SDM630-Modbus RS485 serial speed (default: 9600 baud)
+//  #define SDM630_SPEED         9600              // SDM630-Modbus RS485 serial speed (default: 9600 baud)
 //#define USE_MP3_PLAYER                           // Use of the DFPlayer Mini MP3 Player RB-DFR-562 commands: play, volume and stop
-  #define MP3_VOLUME           10                // Set the startup volume on init, the range can be 0..30(max)
+//  #define MP3_VOLUME           10                // Set the startup volume on init, the range can be 0..30(max)
 #define USE_TUYA_DIMMER                          // Add support for Tuya Serial Dimmer
   #define TUYA_DIMMER_ID       0                 // Default dimmer Id
 #define USE_ARMTRONIX_DIMMERS                    // Add support for Armtronix Dimmers (+1k4 code)
 #define USE_PS_16_DZ                             // ADD support for PS-16-DZ Dimmer
 
 // Power monitoring sensors -----------------------
-#define USE_PZEM004T                             // Add support for PZEM004T Energy monitor (+2k code)
-#define USE_PZEM_AC                              // Add support for PZEM014,016 Energy monitor (+1k1 code)
-#define USE_PZEM_DC                              // Add support for PZEM003,017 Energy monitor (+1k1 code)
-#define USE_MCP39F501                            // Add support for MCP39F501 Energy monitor as used in Shelly 2 (+3k1 code)
+//#define USE_PZEM004T                             // Add support for PZEM004T Energy monitor (+2k code)
+//#define USE_PZEM_AC                              // Add support for PZEM014,016 Energy monitor (+1k1 code)
+//#define USE_PZEM_DC                              // Add support for PZEM003,017 Energy monitor (+1k1 code)
+//#define USE_MCP39F501                            // Add support for MCP39F501 Energy monitor as used in Shelly 2 (+3k1 code)
 
 // -- Low level interface devices -----------------
-#define USE_IR_REMOTE                            // Send IR remote commands using library IRremoteESP8266 and ArduinoJson (+4k3 code, 0k3 mem, 48 iram)
+//#define USE_IR_REMOTE                            // Send IR remote commands using library IRremoteESP8266 and ArduinoJson (+4k3 code, 0k3 mem, 48 iram)
 //  #define USE_IR_HVAC                            // Support for HVAC (Toshiba, Mitsubishi and LG) system using IR (+3k5 code)
-  #define USE_IR_RECEIVE                         // Support for IR receiver (+7k2 code, 264 iram)
-    #define IR_RCV_BUFFER_SIZE      100          // Max number of packets allowed in capture buffer (default 100 (*2 bytes ram))
-    #define IR_RCV_TIMEOUT          15           // Number of milli-Seconds of no-more-data before we consider a message ended (default 15)
-    #define IR_RCV_MIN_UNKNOWN_SIZE 6            // Set the smallest sized "UNKNOWN" message packets we actually care about (default 6)
+//  #define USE_IR_RECEIVE                         // Support for IR receiver (+7k2 code, 264 iram)
+//    #define IR_RCV_BUFFER_SIZE      100          // Max number of packets allowed in capture buffer (default 100 (*2 bytes ram))
+//    #define IR_RCV_TIMEOUT          15           // Number of milli-Seconds of no-more-data before we consider a message ended (default 15)
+//    #define IR_RCV_MIN_UNKNOWN_SIZE 6            // Set the smallest sized "UNKNOWN" message packets we actually care about (default 6)
 
-#define USE_WS2812                               // WS2812 Led string using library NeoPixelBus (+5k code, +1k mem, 232 iram) - Disable by //
-  #define USE_WS2812_CTYPE     NEO_GRB           // WS2812 Color type (NEO_RGB, NEO_GRB, NEO_BRG, NEO_RBG, NEO_RGBW, NEO_GRBW)
+//#define USE_WS2812                               // WS2812 Led string using library NeoPixelBus (+5k code, +1k mem, 232 iram) - Disable by //
+//  #define USE_WS2812_CTYPE     NEO_GRB           // WS2812 Color type (NEO_RGB, NEO_GRB, NEO_BRG, NEO_RBG, NEO_RGBW, NEO_GRBW)
 //  #define USE_WS2812_DMA                         // DMA supports only GPIO03 (= Serial RXD) (+1k mem). When USE_WS2812_DMA is enabled expect Exceptions on Pow
 
-#define USE_ARILUX_RF                            // Add support for Arilux RF remote controller (+0k8 code, 252 iram (non 2.3.0))
+//#define USE_ARILUX_RF                            // Add support for Arilux RF remote controller (+0k8 code, 252 iram (non 2.3.0))
 
-#define USE_SR04                                 // Add support for HC-SR04 ultrasonic devices (+1k code)
+//#define USE_SR04                                 // Add support for HC-SR04 ultrasonic devices (+1k code)
 
 //#define USE_TM1638                               // Add support for TM1638 switches copying Switch1 .. Switch8 (+1k code)
-#define USE_HX711                                // Add support for HX711 load cell (+1k5 code)
+//#define USE_HX711                                // Add support for HX711 load cell (+1k5 code)
 //  #define USE_HX711_GUI                          // Add optional web GUI to HX711 as scale (+1k8 code)
 
-#define USE_RF_FLASH                             // Add support for flashing the EFM8BB1 chip on the Sonoff RF Bridge. C2CK must be connected to GPIO4, C2D to GPIO5 on the PCB (+3k code)
+//#define USE_RF_FLASH                             // Add support for flashing the EFM8BB1 chip on the Sonoff RF Bridge. C2CK must be connected to GPIO4, C2D to GPIO5 on the PCB (+3k code)
 
-#define USE_TX20_WIND_SENSOR                     // Add support for La Crosse TX20 anemometer (+2k code)
+//#define USE_TX20_WIND_SENSOR                     // Add support for La Crosse TX20 anemometer (+2k code)
 
-#define USE_RC_SWITCH                            // Add support for RF transceiver using library RcSwitch (+2k7 code, 460 iram)
+//#define USE_RC_SWITCH                            // Add support for RF transceiver using library RcSwitch (+2k7 code, 460 iram)
 
 /*********************************************************************************************\
  * Debug features are only supported in development branch
