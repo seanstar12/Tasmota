@@ -909,13 +909,13 @@ void LightSetPower(void)
   }
   if (light_power && !light_old_power) {
     light_update = 1;
-    if (Settings.module == MJ_SD01_DIMMER) {   // adjust GPIO16 to turn on/off MCU power
+  }
+  if (Settings.module == MJ_SD01_DIMMER) {  // adjust GPIO16 to turn on/off MCU power
+    if (light_power) {
       digitalWrite(16,LOW);
-    } 
-  } else {
-    if (Settings.module == MJ_SD01_DIMMER) {   // adjust GPIO16 to turn on/off MCU power
+    } else {
       digitalWrite(16,HIGH);
-    } 
+    }
   }
   LightAnimate();
 }
