@@ -19,11 +19,19 @@ I personally use this build on Tuya based dimmers and the Martin Jerry SD-01 Dim
 
 [Moes Dimmer similar to the Oittm but possibly ships to additional countries](https://amzn.to/2PvO1bm)
 
-## Martin Jerry SD-01 Dimmer Setup
+### Martin Jerry SD-01 Dimmer Setup
+
+## Manual Flashing(Soldering Method)
 
 Unplug the faceplate from the rear dimming module until you are ready to connect it to mains power!  Do not connect the USB flasher to the faceplate while mains power is applied to the unit!  The magic smoke will come out or worse!
 
 Solder the wires for flashing like you normally would for a Tuya module flash [as shown here](https://github.com/arendst/Sonoff-Tasmota/wiki/SM-SO301) .  You do not need to solder GPIO 0 as the UP button is also GPIO 0, simply hold this button up during boot.  Use the latest bin file provided in this [folder](https://github.com/digiblur/Sonoff-Tasmota/tree/development/bins).
+
+## Tuya-Convert (OTA Method)
+
+The device should be in pairing mode (fast blink) upon applying power to the switch.  Follow the standard Tuya-Convert process.  After the dimmer is on the network, download the latest latest bin file provided in this [folder](https://github.com/digiblur/Sonoff-Tasmota/tree/development/bins) to a folder on your computer.  Use the Firmware Upgrade button on the Tasmota GUI and browse to the bin file that was just downloaded.
+
+## Setup
 
 Once you have the device connected to your WiFi and MQTT broker, change the module type to the MJ-SD01 Dimmer.  Let the device reboot and issue the following backlog on the console.  Make sure every command takes effect:
 
