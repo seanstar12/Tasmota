@@ -13,13 +13,15 @@ I personally use this build on Tuya based dimmers and the Martin Jerry SD-01 Dim
 
 [Martin Jerry SD-01 Dimmer](https://amzn.to/2L8XeFS)	
 
+[Tessan SD-02 Dimmer](https://amzn.to/2TfmTzh)	
+
 [Lesim Dimmer with Number Display](https://amzn.to/2EetlT1)	
 
-[Oittm/Lopoo Dimmer with Touch Panel](https://amzn.to/2Uufrls)	
+[Upgraded TreatLife Dimmer with Touch Panel](https://amzn.to/2Tbym2N)	
 
 [Moes Dimmer similar to the Oittm but possibly ships to additional countries](https://amzn.to/2PvO1bm)
 
-### Martin Jerry SD-01 Dimmer Setup
+### Martin Jerry SD-01 & Tessan SD-02 Dimmer Setup
 
 ## Manual Flashing(Soldering Method)
 
