@@ -271,7 +271,7 @@ bool XsnsEnabled(uint8_t sns_index)
 #endif
     return bitRead(Settings.sensors[index / 32], index % 32);
   }
-  return 1;
+  return true;
 }
 
 bool XsnsPresent(uint8_t sns_index)

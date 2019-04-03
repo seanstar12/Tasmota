@@ -661,6 +661,7 @@ const uint8_t kModuleNiceList[MAXMODULE] PROGMEM = {
   MJ_SD01_DIMMER
 };
 
+
 // Default module settings
 const mytmplt kModules[MAXMODULE] PROGMEM = {
   { "Sonoff Basic",    // Sonoff Basic (ESP8266)
