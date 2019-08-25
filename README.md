@@ -1,4 +1,4 @@
-## Sonoff-Tasmota - digiDIM Temporary Fork @ 6.5.0
+## Sonoff-Tasmota - digiDIM Temporary Fork @ 6.6.0.6
 
 Precompiled bins supplied in the bins folder of this repo.
 
@@ -83,8 +83,3 @@ Rule3 1
   payload_not_available: "Offline"
   retain: false
 ```
-
-
-Alternative firmware for _ESP8266 based devices_ like [iTead](https://www.itead.cc/) _**Sonoff**_ with **web**, **timers**, 'Over The Air' (**OTA**) firmware updates and **sensors support**, allowing control under **Serial**, **HTTP**, **MQTT** and **KNX**, so as to be used on **Smart Home Systems**. Written for Arduino IDE and PlatformIO.
-
-[![GitHub version](https://img.shields.io/github/release/arendst/Sonoff-Tasmota.svg)](https://github.com/arendst/Sonoff-Tasmota/releases/latest)
