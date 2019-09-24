@@ -1,8 +1,12 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
+title: ''
+labels: ''
+assignees: ''
 
 ---
+
 **Have you look for this feature in other issues and in the wiki?**
 
 **Is your feature request related to a problem? Please describe.**
