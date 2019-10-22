@@ -1,3 +1,7 @@
+// Thanks for @marcusone on Discord for putting this together!  
+// Flash the bin to your NodeMCU or Wemos D1 mini and just feed it some power. 
+// Solid onboard LED means it is connected to vtrust-flash
+
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 
