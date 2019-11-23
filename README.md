@@ -1,4 +1,4 @@
-## Sonoff-Tasmota - digiDIM Temporary Fork @ 6.6.0.6
+## Tasmota - digiDIM Kinda Sorta Not Really Temporary Fork @ 7.0.0.5 - Core 2.6.1
 
 Precompiled bins supplied in the bins folder of this repo.
 
