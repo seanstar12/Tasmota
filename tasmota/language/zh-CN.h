@@ -71,6 +71,7 @@
 #define D_COLDLIGHT "冷"
 #define D_COMMAND "命令:"
 #define D_CONNECTED "已连接"
+#define D_CORS_DOMAIN "CORS Domain"
 #define D_COUNT "数量:"
 #define D_COUNTER "计数器"
 #define D_CURRENT "电流"          // As in Voltage and Current
@@ -112,6 +113,7 @@
 #define D_LIGHT "灯"
 #define D_LWT "LWT"
 #define D_MODULE "模块"
+#define D_MOISTURE "Moisture"
 #define D_MQTT "MQTT"
 #define D_MULTI_PRESS "多次按键"
 #define D_NOISE "嘈杂"
@@ -352,6 +354,7 @@
 #define D_UPLOAD_ERR_11 "擦除 RF 芯片失败"
 #define D_UPLOAD_ERR_12 "写入 RF 芯片失败"
 #define D_UPLOAD_ERR_13 "解码 RF 固件失败"
+#define D_UPLOAD_ERR_14 "Not compatible"
 #define D_UPLOAD_ERROR_CODE "上传错误代码"
 
 #define D_ENTER_COMMAND "输入命令"
@@ -628,6 +631,8 @@
 #define D_SENSOR_SLAVE_TX    "Slave TX"
 #define D_SENSOR_SLAVE_RX    "Slave RX"
 #define D_SENSOR_SLAVE_RESET "Slave RST"
+#define D_SENSOR_GPS_RX        "GPS RX"
+#define D_SENSOR_GPS_TX        "GPS TX"
 
 // Units
 #define D_UNIT_AMPERE "安"
@@ -696,5 +701,18 @@
 #define D_SOLAX_ERROR_6   "Over Temperature Fault"
 #define D_SOLAX_ERROR_7   "Fan Fault"
 #define D_SOLAX_ERROR_8   "Other Device Fault"
+
+//xdrv_10_scripter.ino
+#define D_CONFIGURE_SCRIPT     "Edit script"
+#define D_SCRIPT               "edit script"
+#define D_SDCARD_UPLOAD        "file upload"
+#define D_SDCARD_DIR           "sd card directory"
+#define D_UPL_DONE             "Done"
+#define D_SCRIPT_CHARS_LEFT    "chars left"
+#define D_SCRIPT_CHARS_NO_MORE "no more chars"
+#define D_SCRIPT_DOWNLOAD      "Download"
+#define D_SCRIPT_ENABLE        "script enable"
+#define D_SCRIPT_UPLOAD        "Upload"
+#define D_SCRIPT_UPLOAD_FILES  "Upload files"
 
 #endif  // _LANGUAGE_ZH_CN_H_

@@ -1,6 +1,4 @@
-<img src="/tools/logo/TASMOTA_FullLogo_Vector.svg" alt="Logo" align="right" height="76"/>
-
-# Tasmota I2C devices
+# I2C devices
 
 Tasmota supports several I2C devices but to use them they mostly need to be enabled at compile time to solve possible address conflicts.
 
@@ -63,4 +61,7 @@ Index | Define              | Driver  | Device   | Address(es) | Description
   38  | USE_DISPLAY_ILI9488 | xdsp_08 | FT6236   | 0x38        | Touch panel controller
   39  | USE_DISPLAY_RA8876  | xdsp_10 | FT5316   | 0x38        | Touch panel controller
   40  | USE_TSL2591         | xsns_57 | TLS2591  | 0x29        | Light intensity sensor
+  41  | USE_DHT12           | xsns_58 | DHT12    | 0x5C        | Temperature and humidity sensor
+  42  | USE_DS1624          | xsns_59 | DS1621   | 0x48 - 0x4F | Temperature sensor
+  42  | USE_DS1624          | xsns_59 | DS1624   | 0x48 - 0x4F | Temperature sensor
 

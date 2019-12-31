@@ -72,6 +72,7 @@
 #define D_COMMAND "Εντολή"
 #define D_CONNECTED "Συνδεδεμένο"
 #define D_COUNT "Μέτρηση"
+#define D_CORS_DOMAIN "CORS Domain"
 #define D_COUNTER "Μετρητής"
 #define D_CURRENT "Ένταση"          // As in Voltage and Current
 #define D_DATA "Δεδομένα"
@@ -112,6 +113,7 @@
 #define D_LIGHT "Φως"
 #define D_LWT "LWT"
 #define D_MODULE "Μονάδα"
+#define D_MOISTURE "Moisture"
 #define D_MQTT "MQTT"
 #define D_MULTI_PRESS "ανίχνευση για πολλαπλά πατήματα"
 #define D_NOISE "Θόρυβος"
@@ -352,6 +354,7 @@
 #define D_UPLOAD_ERR_11 "Αποτυχία σβησίματος στο RF chip"
 #define D_UPLOAD_ERR_12 "Αποτυχία εγγραφής στο RF chip"
 #define D_UPLOAD_ERR_13 "Failed to decode RF firmware"
+#define D_UPLOAD_ERR_14 "Not compatible"
 #define D_UPLOAD_ERROR_CODE "Κωδικός λάθους στη μεταφόρτωση"
 
 #define D_ENTER_COMMAND "Εισαγωγή εντολής"
@@ -628,6 +631,8 @@
 #define D_SENSOR_SLAVE_TX    "Slave TX"
 #define D_SENSOR_SLAVE_RX    "Slave RX"
 #define D_SENSOR_SLAVE_RESET "Slave RST"
+#define D_SENSOR_GPS_RX        "GPS RX"
+#define D_SENSOR_GPS_TX        "GPS TX"
 
 // Units
 #define D_UNIT_AMPERE "A"
@@ -696,5 +701,18 @@
 #define D_SOLAX_ERROR_6   "Over Temperature Fault"
 #define D_SOLAX_ERROR_7   "Fan Fault"
 #define D_SOLAX_ERROR_8   "Other Device Fault"
+
+//xdrv_10_scripter.ino
+#define D_CONFIGURE_SCRIPT     "Edit script"
+#define D_SCRIPT               "edit script"
+#define D_SDCARD_UPLOAD        "file upload"
+#define D_SDCARD_DIR           "sd card directory"
+#define D_UPL_DONE             "Done"
+#define D_SCRIPT_CHARS_LEFT    "chars left"
+#define D_SCRIPT_CHARS_NO_MORE "no more chars"
+#define D_SCRIPT_DOWNLOAD      "Download"
+#define D_SCRIPT_ENABLE        "script enable"
+#define D_SCRIPT_UPLOAD        "Upload"
+#define D_SCRIPT_UPLOAD_FILES  "Upload files"
 
 #endif  // _LANGUAGE_EL_GR_H_

@@ -71,6 +71,7 @@
 #define D_COLDLIGHT "Fredda"
 #define D_COMMAND "Comando"
 #define D_CONNECTED "Connesso"
+#define D_CORS_DOMAIN "CORS Domain"
 #define D_COUNT "Conteggio"
 #define D_COUNTER "Contatore"
 #define D_CURRENT "Corrente"          // As in Voltage and Current
@@ -112,6 +113,7 @@
 #define D_LIGHT "Luce"
 #define D_LWT "LWT"
 #define D_MODULE "Modulo"
+#define D_MOISTURE "Umidità"
 #define D_MQTT "MQTT"
 #define D_MULTI_PRESS "multi-pressione"
 #define D_NOISE "Rumore"
@@ -352,6 +354,7 @@
 #define D_UPLOAD_ERR_11 "Cancellazione fallita del chip RF"
 #define D_UPLOAD_ERR_12 "Scrittura fallita del chip RF"
 #define D_UPLOAD_ERR_13 "Decodifica fallita del firmware RF"
+#define D_UPLOAD_ERR_14 "Not compatible"
 #define D_UPLOAD_ERROR_CODE "Codice errore invio"
 
 #define D_ENTER_COMMAND "Inserire comando"
@@ -628,6 +631,8 @@
 #define D_SENSOR_SLAVE_TX    "Slave TX"
 #define D_SENSOR_SLAVE_RX    "Slave RX"
 #define D_SENSOR_SLAVE_RESET "Slave RST"
+#define D_SENSOR_GPS_RX        "GPS RX"
+#define D_SENSOR_GPS_TX        "GPS TX"
 
 // Units
 #define D_UNIT_AMPERE "A"
@@ -696,5 +701,18 @@
 #define D_SOLAX_ERROR_6   "Errore Temperatura Eccessiva"
 #define D_SOLAX_ERROR_7   "Errore Ventilatore"
 #define D_SOLAX_ERROR_8   "Altro Errore del Dispositivo"
+
+//xdrv_10_scripter.ino
+#define D_CONFIGURE_SCRIPT     "Edit script"
+#define D_SCRIPT               "edit script"
+#define D_SDCARD_UPLOAD        "file upload"
+#define D_SDCARD_DIR           "sd card directory"
+#define D_UPL_DONE             "Done"
+#define D_SCRIPT_CHARS_LEFT    "chars left"
+#define D_SCRIPT_CHARS_NO_MORE "no more chars"
+#define D_SCRIPT_DOWNLOAD      "Download"
+#define D_SCRIPT_ENABLE        "script enable"
+#define D_SCRIPT_UPLOAD        "Upload"
+#define D_SCRIPT_UPLOAD_FILES  "Upload files"
 
 #endif  // _LANGUAGE_IT_IT_H_

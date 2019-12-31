@@ -172,6 +172,7 @@ double const f_sixthpi      = f_pi / 6.0;                   // f_pi/6.0, used in
 double const f_tansixthpi   = tan(f_sixthpi);               // tan(f_pi/6), used in atan routines
 double const f_twelfthpi    = f_pi / 12.0;                  // f_pi/12.0, used in atan routines
 double const f_tantwelfthpi = tan(f_twelfthpi);             // tan(f_pi/12), used in atan routines
+float  const f_180pi        = 180 / f_pi;                   // 180 / pi for angles in degrees
 
 // *******************************************************************
 // ***
@@ -375,9 +376,10 @@ float sqrt1(const float x)
 // changeUIntScale
 // Change a value for range a..b to c..d, using only unsigned int math
 //
+// New version, you don't need the "to_min < to_max" precondition anymore
+//
 // PRE-CONDITIONS (if not satisfied, you may 'halt and catch fire')
 //    from_min < from_max  (not checked)
-//    to_min   < to_max    (not checked)
 //    from_min <= num <= from-max  (chacked)
 // POST-CONDITIONS
 //    to_min <= result <= to_max
@@ -385,8 +387,12 @@ float sqrt1(const float x)
 uint16_t changeUIntScale(uint16_t inum, uint16_t ifrom_min, uint16_t ifrom_max,
                                        uint16_t ito_min, uint16_t ito_max) {
   // guard-rails
-  if ((ito_min >= ito_max) || (ifrom_min >= ifrom_max)) {
-    return ito_min;  // invalid input, return arbitrary value
+  if (ifrom_min >= ifrom_max) {
+    if (ito_min > ito_max) {
+      return ito_max;
+    } else {
+      return ito_min;  // invalid input, return arbitrary value
+    }
   }
   // convert to uint31, it's more verbose but code is more compact
   uint32_t num = inum;
@@ -397,6 +403,15 @@ uint16_t changeUIntScale(uint16_t inum, uint16_t ifrom_min, uint16_t ifrom_max,
 
   // check source range
   num = (num > from_max ? from_max : (num < from_min ? from_min : num));
+
+  // check to_* order
+  if (to_min > to_max) {
+    // reverse order
+    num = (from_max - num) + from_min;
+    to_min = ito_max;
+    to_max = ito_min;
+  }
+
   uint32_t numerator = (num - from_min) * (to_max - to_min);
   uint32_t result;
   if (numerator >= 0x80000000L) {

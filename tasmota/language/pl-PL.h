@@ -62,26 +62,27 @@
 #define D_BRIGHTLIGHT "Jasny"
 #define D_BSSID "BSSId"
 #define D_BUTTON "Przycisk"
-#define D_BY "by"                    // Written by me
+#define D_BY "przez"                    // Written by me
 #define D_BYTES "Bajtów"
-#define D_CELSIUS "Celsiusza"
+#define D_CELSIUS "Celsiusz"
 #define D_CHANNEL "Kanał"
-#define D_CO2 "Dwutlenku węgla"
-#define D_CODE "kod"                 // Button code
+#define D_CO2 "Dwutlenek węgla"
+#define D_CODE "Kod"                 // Button code
 #define D_COLDLIGHT "Zimny"
 #define D_COMMAND "Komenda"
 #define D_CONNECTED "Połączony"
+#define D_CORS_DOMAIN "Domena CORS"
 #define D_COUNT "Licz"
 #define D_COUNTER "Licznik"
 #define D_CURRENT "Prąd"          // As in Voltage and Current
 #define D_DATA "Data"
 #define D_DARKLIGHT "Ciemny"
 #define D_DEBUG "Debug"
-#define D_DISABLED "Zablokowany"
+#define D_DISABLED "Wyłączony"
 #define D_DISTANCE "Odległość"
 #define D_DNS_SERVER "Serwer DNS"
 #define D_DONE "Wykonane"
-#define D_DST_TIME "DST"
+#define D_DST_TIME "Czas DST"
 #define D_ECO2 "eCO2"
 #define D_EMULATION "Emulacja"
 #define D_ENABLED "Załączony"
@@ -102,7 +103,7 @@
 #define D_HOST "Serwer"
 #define D_HOSTNAME "Nazwa serwera"
 #define D_HUMIDITY "Wilgotność"
-#define D_ILLUMINANCE "Oświetlenie"
+#define D_ILLUMINANCE "Podświetlanie"
 #define D_IMMEDIATE "Natychmiastowy"      // Button immediate
 #define D_INDEX "Indeks"
 #define D_INFO "Informacja"
@@ -112,6 +113,7 @@
 #define D_LIGHT "Światło"
 #define D_LWT "LWT"
 #define D_MODULE "Moduł"
+#define D_MOISTURE "Wilgotność"
 #define D_MQTT "MQTT"
 #define D_MULTI_PRESS "Wielokrotne naciśnięcie"
 #define D_NOISE "Szum"
@@ -130,8 +132,8 @@
 #define D_POWERUSAGE_REACTIVE "Moc bierna"
 #define D_PRESSURE "Ciśnienie"
 #define D_PRESSUREATSEALEVEL "Ciśnienie na poziomie morza"
-#define D_PROGRAM_FLASH_SIZE "Wielkość programu flash"
-#define D_PROGRAM_SIZE "Wielkość programu"
+#define D_PROGRAM_FLASH_SIZE "Rozmiar programu flash"
+#define D_PROGRAM_SIZE "Rozmiar programu"
 #define D_PROJECT "Projekt"
 #define D_RAIN "Deszcz"
 #define D_RECEIVED "Otrzymany"
@@ -313,8 +315,8 @@
 #define D_CONFIGURATION_SAVED "Ustawienia zapisane"
 #define D_CONFIGURATION_RESET "Ustawienia zresetowane"
 
-#define D_PROGRAM_VERSION "Wersja programu"
-#define D_BUILD_DATE_AND_TIME "Dzień i godzina kompilacji"
+#define D_PROGRAM_VERSION "Wersja oprogramowania"
+#define D_BUILD_DATE_AND_TIME "Data kompilacji"
 #define D_CORE_AND_SDK_VERSION "Wersja Core/SDK"
 #define D_FLASH_WRITE_COUNT "Liczba zapisów do pamięci"
 #define D_MAC_ADDRESS "Adres MAC"
@@ -328,7 +330,7 @@
 #define D_MDNS_DISCOVERY "Wykrywanie mDNS"
 #define D_MDNS_ADVERTISE "Rozgłaszanie mDNS"
 #define D_ESP_CHIP_ID "ID ukladu ESP"
-#define D_FLASH_CHIP_ID "ID układu pamięci flash"
+#define D_FLASH_CHIP_ID "ID pamięci flash"
 #define D_FLASH_CHIP_SIZE "Rozmiar pamięci flash"
 #define D_FREE_PROGRAM_SPACE "Wolna pamięć programu"
 
@@ -352,6 +354,7 @@
 #define D_UPLOAD_ERR_11 "Błąd kasowania układu RF"
 #define D_UPLOAD_ERR_12 "Błąd zapisu układu RF"
 #define D_UPLOAD_ERR_13 "Błąd dekodowania oprrogramowania układu RF"
+#define D_UPLOAD_ERR_14 "Not compatible"
 #define D_UPLOAD_ERROR_CODE "Błąd wgrywania"
 
 #define D_ENTER_COMMAND "Wprowadź polecenie"
@@ -389,7 +392,7 @@
 // xdrv_07_domoticz.ino
 #define D_DOMOTICZ_PARAMETERS "Parametry Domoticz"
 #define D_DOMOTICZ_IDX "Idx"
-#define D_DOMOTICZ_KEY_IDX "Key idx"
+#define D_DOMOTICZ_KEY_IDX "Klucz Idx"
 #define D_DOMOTICZ_SWITCH_IDX "Przełącznik Idx"
 #define D_DOMOTICZ_SENSOR_IDX "Sensor Idx"
   #define D_DOMOTICZ_TEMP "Temperatura"
@@ -628,6 +631,8 @@
 #define D_SENSOR_SLAVE_TX    "Slave TX"
 #define D_SENSOR_SLAVE_RX    "Slave RX"
 #define D_SENSOR_SLAVE_RESET "Slave RST"
+#define D_SENSOR_GPS_RX        "GPS RX"
+#define D_SENSOR_GPS_TX        "GPS TX"
 
 // Units
 #define D_UNIT_AMPERE "A"
@@ -669,7 +674,7 @@
 #define D_EXPORT_ACTIVE   "Czynna oddana"
 #define D_IMPORT_REACTIVE "Bierna pobrana"
 #define D_EXPORT_REACTIVE "Bierna oddana"
-#define D_TOTAL_REACTIVE  "Całkowita bierna"
+#define D_TOTAL_REACTIVE  "Bierna całkowita"
 #define D_UNIT_KWARH      "kVArh"
 #define D_UNIT_ANGLE      "Deg"
 
@@ -696,5 +701,18 @@
 #define D_SOLAX_ERROR_6   "Błąd - przegrzanie"
 #define D_SOLAX_ERROR_7   "Błąd - wentylator"
 #define D_SOLAX_ERROR_8   "Błąd - inne urządzenie"
+
+//xdrv_10_scripter.ino
+#define D_CONFIGURE_SCRIPT     "Edit script"
+#define D_SCRIPT               "edit script"
+#define D_SDCARD_UPLOAD        "file upload"
+#define D_SDCARD_DIR           "sd card directory"
+#define D_UPL_DONE             "Done"
+#define D_SCRIPT_CHARS_LEFT    "chars left"
+#define D_SCRIPT_CHARS_NO_MORE "no more chars"
+#define D_SCRIPT_DOWNLOAD      "Download"
+#define D_SCRIPT_ENABLE        "script enable"
+#define D_SCRIPT_UPLOAD        "Upload"
+#define D_SCRIPT_UPLOAD_FILES  "Upload files"
 
 #endif  // _LANGUAGE_PL_PL_D_H_

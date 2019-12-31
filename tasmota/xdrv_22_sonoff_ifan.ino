@@ -33,8 +33,8 @@ const uint8_t kIFan03Sequence[MAX_FAN_SPEED][MAX_FAN_SPEED] = {{0, 2, 2, 2}, {0,
 const char kSonoffIfanCommands[] PROGMEM = "|"  // No prefix
   D_CMND_FANSPEED;
 
-void (* const SonoffIfanCommand[])(void) PROGMEM =
-  { &CmndFanspeed };
+void (* const SonoffIfanCommand[])(void) PROGMEM = {
+  &CmndFanspeed };
 
 uint8_t ifan_fanspeed_timer = 0;
 uint8_t ifan_fanspeed_goal = 0;
@@ -217,9 +217,7 @@ void CmndFanspeed(void)
 bool SonoffIfanInit(void)
 {
   if (SONOFF_IFAN03 == my_module_type) {
-    Settings.flag.mqtt_serial = 0;  // CMND_SERIALSEND and CMND_SERIALLOG
-    baudrate = 9600;
-    SetSeriallog(LOG_LEVEL_NONE);
+    SetSerial(9600, TS_SERIAL_8N1);
   }
   return false;  // Continue init chain
 }

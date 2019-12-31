@@ -71,6 +71,7 @@
 #define D_COLDLIGHT "Hideg fény"
 #define D_COMMAND "Parancs"
 #define D_CONNECTED "Csatlakoztatva"
+#define D_CORS_DOMAIN "CORS Domain"
 #define D_COUNT "Szám"
 #define D_COUNTER "Számláló"
 #define D_CURRENT "Áramerősség"          // As in Voltage and Current
@@ -112,6 +113,7 @@
 #define D_LIGHT "Fény"
 #define D_LWT "LWT"
 #define D_MODULE "Modul"
+#define D_MOISTURE "Moisture"
 #define D_MQTT "MQTT"
 #define D_MULTI_PRESS "több lenyomás"
 #define D_NOISE "Zaj"
@@ -352,6 +354,7 @@
 #define D_UPLOAD_ERR_11 "Az RF chip törlése sikertelen"
 #define D_UPLOAD_ERR_12 "Az RF chip írása sikertelen"
 #define D_UPLOAD_ERR_13 "Az RF firmware dekódolása sikertelen"
+#define D_UPLOAD_ERR_14 "Not compatible"
 #define D_UPLOAD_ERROR_CODE "Feltöltési hibakód"
 
 #define D_ENTER_COMMAND "Kérem a parancsot..."
@@ -628,6 +631,8 @@
 #define D_SENSOR_SLAVE_TX    "Slave TX"
 #define D_SENSOR_SLAVE_RX    "Slave RX"
 #define D_SENSOR_SLAVE_RESET "Slave RST"
+#define D_SENSOR_GPS_RX        "GPS RX"
+#define D_SENSOR_GPS_TX        "GPS TX"
 
 // Units
 #define D_UNIT_AMPERE "A"
@@ -696,5 +701,18 @@
 #define D_SOLAX_ERROR_6   "Over Temperature Fault"
 #define D_SOLAX_ERROR_7   "Fan Fault"
 #define D_SOLAX_ERROR_8   "Other Device Fault"
+
+//xdrv_10_scripter.ino
+#define D_CONFIGURE_SCRIPT     "Edit script"
+#define D_SCRIPT               "edit script"
+#define D_SDCARD_UPLOAD        "file upload"
+#define D_SDCARD_DIR           "sd card directory"
+#define D_UPL_DONE             "Done"
+#define D_SCRIPT_CHARS_LEFT    "chars left"
+#define D_SCRIPT_CHARS_NO_MORE "no more chars"
+#define D_SCRIPT_DOWNLOAD      "Download"
+#define D_SCRIPT_ENABLE        "script enable"
+#define D_SCRIPT_UPLOAD        "Upload"
+#define D_SCRIPT_UPLOAD_FILES  "Upload files"
 
 #endif  // _LANGUAGE_HU_HU_H_

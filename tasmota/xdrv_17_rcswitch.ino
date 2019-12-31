@@ -35,8 +35,8 @@
 const char kRfSendCommands[] PROGMEM = "|"  // No prefix
   D_CMND_RFSEND;
 
-void (* const RfSendCommand[])(void) PROGMEM =
-  { &CmndRfSend };
+void (* const RfSendCommand[])(void) PROGMEM = {
+  &CmndRfSend };
 
 #include <RCSwitch.h>
 
@@ -85,6 +85,7 @@ void RfInit(void)
     mySwitch.enableTransmit(pin[GPIO_RFSEND]);
   }
   if (pin[GPIO_RFRECV] < 99) {
+    pinMode( pin[GPIO_RFRECV], INPUT);
     mySwitch.enableReceive(pin[GPIO_RFRECV]);
   }
 }

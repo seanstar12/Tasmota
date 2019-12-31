@@ -51,14 +51,19 @@ void OsWatchTicker(void)
   uint32_t last_run = abs(t - oswatch_last_loop_time);
 
 #ifdef DEBUG_THEO
-  AddLog_P2(LOG_LEVEL_DEBUG, PSTR(D_LOG_APPLICATION D_OSWATCH " FreeRam %d, rssi %d, last_run %d"), ESP.getFreeHeap(), WifiGetRssiAsQuality(WiFi.RSSI()), last_run);
+  AddLog_P2(LOG_LEVEL_DEBUG, PSTR(D_LOG_APPLICATION D_OSWATCH " FreeRam %d, rssi %d %% (%d dBm), last_run %d"), ESP.getFreeHeap(), WifiGetRssiAsQuality(WiFi.RSSI()), WiFi.RSSI(), last_run);
 #endif  // DEBUG_THEO
   if (last_run >= (OSWATCH_RESET_TIME * 1000)) {
 //    AddLog_P(LOG_LEVEL_INFO, PSTR(D_LOG_APPLICATION D_OSWATCH " " D_BLOCKED_LOOP ". " D_RESTARTING));  // Save iram space
     RtcSettings.oswatch_blocked_loop = 1;
     RtcSettingsSave();
+
 //    ESP.restart();  // normal reboot
-    ESP.reset();  // hard reset
+//    ESP.reset();  // hard reset
+
+    // Force an exception to get a stackdump
+    volatile uint32_t dummy;
+    dummy = *((uint32_t*) 0x00000000);
   }
 }
 
@@ -105,12 +110,6 @@ String GetResetReason(void)
   } else {
     return ESP.getResetReason();
   }
-}
-
-String GetResetReasonInfo(void)
-{
-  // "Fatal exception:0 flag:2 (EXCEPTION) epc1:0x704022a7 epc2:0x00000000 epc3:0x00000000 excvaddr:0x00000000 depc:0x00000000"
-  return (ResetReason() == REASON_EXCEPTION_RST) ? ESP.getResetInfo() : GetResetReason();
 }
 
 /*********************************************************************************************\
@@ -334,6 +333,22 @@ char* RemoveSpace(char* p)
   return p;
 }
 
+char* ReplaceCommaWithDot(char* p)
+{
+  char* write = (char*)p;
+  char* read = (char*)p;
+  char ch = '.';
+
+  while (ch != '\0') {
+    ch = *read++;
+    if (ch == ',') {
+      ch = '.';
+    }
+    *write++ = ch;
+  }
+  return p;
+}
+
 char* LowerCase(char* dest, const char* source)
 {
   char* write = dest;
@@ -380,6 +395,23 @@ char* Trim(char* p)
   while ((q >= p) && isblank(*q)) { q--; }   // Trim trailing spaces
   q++;
   *q = '\0';
+  return p;
+}
+
+char* RemoveAllSpaces(char* p)
+{
+  // remove any white space from the base64
+  char *cursor = p;
+  uint32_t offset = 0;
+  while (1) {
+    *cursor = *(cursor + offset);
+    if ((' ' == *cursor) || ('\t' == *cursor) || ('\n' == *cursor)) {   // if space found, remove this char until end of string
+      offset++;
+    } else {
+      if (0 == *cursor) { break; }
+      cursor++;
+    }
+  }
   return p;
 }
 
@@ -521,7 +553,7 @@ char* GetPowerDevice(char* dest, uint32_t idx, size_t size)
   return GetPowerDevice(dest, idx, size, 0);
 }
 
-bool IsEsp8285(void)
+void GetEspHardwareType(void)
 {
   // esptool.py get_efuses
   uint32_t efuse1 = *(uint32_t*)(0x3FF00050);
@@ -529,17 +561,16 @@ bool IsEsp8285(void)
 //  uint32_t efuse3 = *(uint32_t*)(0x3FF00058);
 //  uint32_t efuse4 = *(uint32_t*)(0x3FF0005C);
 
-  bool is_8285 = ( (efuse1 & (1 << 4)) || (efuse2 & (1 << 16)) );
+  is_8285 = ( (efuse1 & (1 << 4)) || (efuse2 & (1 << 16)) );
   if (is_8285 && (ESP.getFlashChipRealSize() > 1048576)) {
     is_8285 = false;  // ESP8285 can only have 1M flash
   }
-  return is_8285;
 }
 
 String GetDeviceHardware(void)
 {
   char buff[10];
-  if (IsEsp8285()) {
+  if (is_8285) {
     strcpy_P(buff, PSTR("ESP8285"));
   } else {
     strcpy_P(buff, PSTR("ESP8266EX"));
@@ -705,6 +736,13 @@ bool DecodeCommand(const char* haystack, void (* const MyCommand[])(void))
 {
   GetTextIndexed(XdrvMailbox.command, CMDSZ, 0, haystack);  // Get prefix if available
   int prefix_length = strlen(XdrvMailbox.command);
+  if (prefix_length) {
+    char prefix[prefix_length +1];
+    snprintf_P(prefix, sizeof(prefix), XdrvMailbox.topic);  // Copy prefix part only
+    if (strcasecmp(prefix, XdrvMailbox.command)) {
+      return false;                                         // Prefix not in command
+    }
+  }
   int command_code = GetCommandCode(XdrvMailbox.command + prefix_length, CMDSZ, XdrvMailbox.topic + prefix_length, haystack);
   if (command_code > 0) {                                   // Skip prefix
     XdrvMailbox.command_code = command_code -1;
@@ -714,15 +752,15 @@ bool DecodeCommand(const char* haystack, void (* const MyCommand[])(void))
   return false;
 }
 
-const char kOptions[] PROGMEM = "OFF|" D_OFF "|" D_FALSE "|" D_STOP "|" D_CELSIUS "|"              // 0
-                                "ON|" D_ON "|" D_TRUE "|" D_START "|" D_FAHRENHEIT "|" D_USER "|"  // 1
-                                "TOGGLE|" D_TOGGLE "|" D_ADMIN "|"                                 // 2
-                                "BLINK|" D_BLINK "|"                                               // 3
-                                "BLINKOFF|" D_BLINKOFF "|"                                         // 4
-                                "ALL" ;                                                            // 255
+const char kOptions[] PROGMEM = "OFF|" D_OFF "|FALSE|" D_FALSE "|STOP|" D_STOP "|" D_CELSIUS "|"              // 0
+                                "ON|" D_ON "|TRUE|" D_TRUE "|START|" D_START "|" D_FAHRENHEIT "|" D_USER "|"  // 1
+                                "TOGGLE|" D_TOGGLE "|" D_ADMIN "|"                                            // 2
+                                "BLINK|" D_BLINK "|"                                                          // 3
+                                "BLINKOFF|" D_BLINKOFF "|"                                                    // 4
+                                "ALL" ;                                                                       // 255
 
-const uint8_t sNumbers[] PROGMEM = { 0,0,0,0,0,
-                                     1,1,1,1,1,1,
+const uint8_t sNumbers[] PROGMEM = { 0,0,0,0,0,0,0,
+                                     1,1,1,1,1,1,1,1,
                                      2,2,2,
                                      3,3,
                                      4,4,
@@ -738,19 +776,57 @@ int GetStateNumber(char *state_text)
   return state_number;
 }
 
-void SetSerialBaudrate(int baudrate)
+String GetSerialConfig(void)
+{
+  // Settings.serial_config layout
+  // b000000xx - 5, 6, 7 or 8 data bits
+  // b00000x00 - 1 or 2 stop bits
+  // b000xx000 - None, Even or Odd parity
+
+  const char kParity[] = "NEOI";
+
+  char config[4];
+  config[0] = '5' + (Settings.serial_config & 0x3);
+  config[1] = kParity[(Settings.serial_config >> 3) & 0x3];
+  config[2] = '1' + ((Settings.serial_config >> 2) & 0x1);
+  config[3] = '\0';
+  return String(config);
+}
+
+void SetSerialBegin()
+{
+  uint32_t baudrate = Settings.baudrate * 300;
+  AddLog_P2(LOG_LEVEL_INFO, PSTR(D_LOG_SERIAL "Set to %s %d bit/s"), GetSerialConfig().c_str(), baudrate);
+  Serial.flush();
+  Serial.begin(baudrate, (SerialConfig)pgm_read_byte(kTasmotaSerialConfig + Settings.serial_config));
+}
+
+void SetSerialConfig(uint32_t serial_config)
+{
+  if (serial_config > TS_SERIAL_8O2) {
+    serial_config = TS_SERIAL_8N1;
+  }
+  if (serial_config != Settings.serial_config) {
+    Settings.serial_config = serial_config;
+    SetSerialBegin();
+  }
+}
+
+void SetSerialBaudrate(uint32_t baudrate)
 {
   Settings.baudrate = baudrate / 300;
   if (Serial.baudRate() != baudrate) {
-    if (seriallog_level) {
-      AddLog_P2(LOG_LEVEL_INFO, PSTR(D_LOG_APPLICATION D_SET_BAUDRATE_TO " %d"), baudrate);
-    }
-    delay(100);
-    Serial.flush();
-    Serial.begin(baudrate, serial_config);
-    delay(10);
-    Serial.println();
+    SetSerialBegin();
   }
+}
+
+void SetSerial(uint32_t baudrate, uint32_t serial_config)
+{
+  Settings.flag.mqtt_serial = 0;  // CMND_SERIALSEND and CMND_SERIALLOG
+  Settings.serial_config = serial_config;
+  Settings.baudrate = baudrate / 300;
+  SetSeriallog(LOG_LEVEL_NONE);
+  SetSerialBegin();
 }
 
 void ClaimSerial(void)
@@ -758,8 +834,7 @@ void ClaimSerial(void)
   serial_local = true;
   AddLog_P(LOG_LEVEL_INFO, PSTR("SNS: Hardware Serial"));
   SetSeriallog(LOG_LEVEL_NONE);
-  baudrate = Serial.baudRate();
-  Settings.baudrate = baudrate / 300;
+  Settings.baudrate = Serial.baudRate() / 300;
 }
 
 void SerialSendRaw(char *codes)
@@ -938,6 +1013,13 @@ int ResponseJsonEndEnd(void)
  * GPIO Module and Template management
 \*********************************************************************************************/
 
+void DigitalWrite(uint32_t gpio_pin, uint32_t state)
+{
+  if (pin[gpio_pin] < 99) {
+    digitalWrite(pin[gpio_pin], state &1);
+  }
+}
+
 uint8_t ModuleNr(void)
 {
   // 0    = User module (255)
@@ -1034,18 +1116,18 @@ bool FlashPin(uint32_t pin)
 
 uint8_t ValidPin(uint32_t pin, uint32_t gpio)
 {
-  uint8_t result = gpio;
-
   if (FlashPin(pin)) {
-    result = GPIO_NONE;    // Disable flash pins GPIO6, GPIO7, GPIO8 and GPIO11
+    return GPIO_NONE;    // Disable flash pins GPIO6, GPIO7, GPIO8 and GPIO11
   }
-  if (!IsEsp8285() && !Settings.flag3.user_esp8285_enable) {  // SetOption51 - Enable ESP8285 user GPIO's
+
+//  if (!is_8285 && !Settings.flag3.user_esp8285_enable) {  // SetOption51 - Enable ESP8285 user GPIO's
+  if ((WEMOS == Settings.module) && !Settings.flag3.user_esp8285_enable) {  // SetOption51 - Enable ESP8285 user GPIO's
     if ((pin == 9) || (pin == 10)) {
-      result = GPIO_NONE;  // Disable possible flash GPIO9 and GPIO10
+      return GPIO_NONE;  // Disable possible flash GPIO9 and GPIO10
     }
   }
 
-  return result;
+  return gpio;
 }
 
 bool ValidGPIO(uint32_t pin, uint32_t gpio)
@@ -1530,10 +1612,10 @@ void Syslog(void)
 {
   // Destroys log_data
 
-  uint32_t current_hash = GetHash(Settings.syslog_host, strlen(Settings.syslog_host));
+  uint32_t current_hash = GetHash(SettingsText(SET_SYSLOG_HOST), strlen(SettingsText(SET_SYSLOG_HOST)));
   if (syslog_host_hash != current_hash) {
     syslog_host_hash = current_hash;
-    WiFi.hostByName(Settings.syslog_host, syslog_host_addr);  // If sleep enabled this might result in exception so try to do it once using hash
+    WiFi.hostByName(SettingsText(SET_SYSLOG_HOST), syslog_host_addr);  // If sleep enabled this might result in exception so try to do it once using hash
   }
   if (PortUdp.beginPacket(syslog_host_addr, Settings.syslog_port)) {
     char syslog_preamble[64];  // Hostname + Id
