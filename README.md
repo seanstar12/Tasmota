@@ -1,12 +1,14 @@
-## Tasmota - digiDIM Kinda Sorta Not Really Temporary Fork @ 7.0.0.5 - Core 2.6.1
+## Tasmota - digiDIM Kinda Sorta Not Really Temporary Fork @ 8.1.0.1 - Core 2.6.1
 
 Precompiled bins supplied in the bins folder of this repo.
+
+NOTE: Once you upgrade to 8.x you will only be able to downgrade to an older version via serial flash.
 
 ### Changes
 
 - Dimming status sent at all power state changes 
 - Power topic updated if a dimming change causes the power state to change
-- Martin Jerry SD-01 Dimmer support
+- Martin Jerry SD-01 (02,03) Dimmer support
 - digiDIMv(X) indicated in the information tab for support purposes
 
 I personally use this build on Tuya based dimmers and the Martin Jerry SD-01 Dimmer in our home with Home Assistant. [Shown here](https://www.digiblur.com/2018/12/state-of-dimmer-tasmota-dimmer-updates.html)
@@ -15,13 +17,15 @@ I personally use this build on Tuya based dimmers and the Martin Jerry SD-01 Dim
 
 [Tessan SD-02 Dimmer](https://amzn.to/2TfmTzh)	
 
+[Acenx SD-03 Dimmer](https://amzn.to/36bKzf5)
+
 [Lesim Dimmer with Number Display](https://amzn.to/2EetlT1)	
 
 [Upgraded TreatLife Dimmer with Touch Panel](https://amzn.to/2Tbym2N)	
 
 [Moes Dimmer similar to the Oittm but possibly ships to additional countries](https://amzn.to/2PvO1bm)
 
-### Martin Jerry SD-01 & Tessan SD-02 Dimmer Setup
+### Martin Jerry SD-01 & Tessan SD-02 & Acenx SD-03 Dimmer Setup
 
 ## Manual Flashing(Soldering Method)
 
