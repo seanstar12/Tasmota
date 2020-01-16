@@ -35,7 +35,7 @@ Solder the wires for flashing like you normally would for a Tuya module flash [a
 
 ## Tuya-Convert (OTA Method)
 
-The device should be in pairing mode (fast blink) upon applying power to the switch.  Follow the standard Tuya-Convert process.  After the dimmer is on the network, download the latest latest bin file provided in this [folder](https://github.com/digiblur/Sonoff-Tasmota/tree/development/bins) to a folder on your computer.  Use the Firmware Upgrade button on the Tasmota GUI and browse to the bin file that was just downloaded.
+The device should be in pairing mode (fast blink) upon applying power to the switch.  Follow the standard Tuya-Convert process.  After the dimmer is on the network, download the latest latest bin file provided in this [folder](https://github.com/digiblur/Sonoff-Tasmota/tree/development/bins) to a folder on your computer.  Use the Firmware Upgrade button on the Tasmota GUI and browse to the bin file that was just downloaded.  If you receive a upload buffer miscompare error while uploading, this means you do not have enough flash space available on the dimmer.  To correct the issue, flash the tasmota-minimal bin through the Tasmota GUI. Then flash the digiDIM bin file.
 
 ## Setup
 
