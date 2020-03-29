@@ -1,4 +1,4 @@
-## Tasmota - digiDIM Kinda Sorta Not Really Temporary Fork @ 8.1.0.1 - Core 2.6.1
+## Tasmota - digiDIM Kinda Sorta Not Really Temporary Fork @ 8.2.0.1
 
 Precompiled bins supplied in the bins folder of this repo.
 
