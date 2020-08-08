@@ -1295,7 +1295,7 @@ void LightInit(void)
         digitalWrite(pin[GPIO_ARIRFSEL], 1);  // Turn off RF
       }
     }
-    if (Settings.module == MJ_SD01_DIMMER) {   // setup GPIO for dimming status on faceplate
+    if (Settings.module == MJ_SD01_DIMMER || Settings.module == MJ_SD01_FAN) {   // setup GPIO for dimming status on faceplate
       pinMode(3, OUTPUT);
       pinMode(5, OUTPUT);
       pinMode(12, OUTPUT);
@@ -1676,13 +1676,13 @@ void LightSetPower(void)
   if (Light.power != Light.old_power) {
     Light.update = true;
   }
-  if (Settings.module == MJ_SD01_DIMMER) {  // adjust GPIO16 to turn on/off MCU power
+  if (Settings.module == MJ_SD01_DIMMER || Settings.module == MJ_SD01_FAN) {  // adjust GPIO16 to turn on/off MCU power
     if (Light.power) {
       digitalWrite(16,LOW);
     } else {
       digitalWrite(16,HIGH);
     }
-  }	  
+  }	    
   LightAnimate();
 }
 
@@ -2074,6 +2074,25 @@ void LightSetOutputs(const uint16_t *cur_col_10) {
         digitalWrite(12, LOW);
         digitalWrite(5, LOW);
         digitalWrite(3, LOW);
+        break;
+      // default: 
+      //   // no match
+      //   break;
+    }
+  }
+  if (Settings.module == MJ_SD01_FAN) {   // adjust display LEDs
+    switch (cur_col[0]) {
+      case 0 ... 80:
+        digitalWrite(14, HIGH);
+        digitalWrite(12, HIGH);
+        break;
+      case 81 ... 203:
+        digitalWrite(14, LOW);
+        digitalWrite(12, HIGH);
+        break;
+      case 204 ... 255:
+        digitalWrite(14, LOW);
+        digitalWrite(12, LOW);
         break;
       // default: 
       //   // no match

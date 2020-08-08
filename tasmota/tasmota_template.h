@@ -427,6 +427,7 @@ enum SupportedModules {
   MJ_SD01_DIMMER,
   PWM_DIMMER,
   SONOFF_D1,
+  MJ_SD01_FAN,
   MAXMODULE};
 
 #define USER_MODULE        255
@@ -884,6 +885,7 @@ const uint8_t kModuleNiceList[] PROGMEM = {
   PS_16_DZ,
 #endif
   MJ_SD01_DIMMER,
+  MJ_SD01_FAN,
 #ifdef USE_EXS_DIMMER
   EXS_DIMMER,
 #endif
@@ -2272,6 +2274,26 @@ const mytmplt kModules[MAXMODULE] PROGMEM = {
      0,                // GPIO12
      GPIO_LED1_INV,    // GPIO13 WiFi Blue Led - Link and Power status
      0, 0, 0, 0
+  },
+  { "MJ-SD01 Fan",    // Martin Jerry SD-01 Dimmer Switch
+     GPIO_SWT3,        // GPIO00 Up Button
+     GPIO_SWT2,        // GPIO01 Down Button
+     GPIO_USER,        // GPIO02 
+     GPIO_REL1_INV,                // GPIO03 Dimmer Level 5 LED(inv)
+     GPIO_LED1_INV,    // GPIO04 Red LED behind button1(inv)    
+     GPIO_REL2_INV,                // GPIO05 Dimmer Level 4 LED(inv)
+                       // GPIO06 (SD_CLK   Flash)
+                       // GPIO07 (SD_DATA0 Flash QIO/DIO/DOUT)
+                       // GPIO08 (SD_DATA1 Flash QIO/DIO/DOUT)
+     0,                // GPIO09 (SD_DATA2 Flash QIO or ESP8285)
+     0,                // GPIO10 (SD_DATA3 Flash QIO or ESP8285)
+                       // GPIO11 (SD_CMD   Flash)
+     0,                // GPIO12 Dimmer Level 3 LED(inv)
+     GPIO_PWM1,        // GPIO13 PWM1 Signal sent to dimming MCU
+     0,    // GPIO14 Dimmer Level 2 LED(inv)
+     GPIO_SWT1,        // GPIO15 On/Off Button (0 = Off, 1 = On)   
+     0,    // GPIO16 Dimming MCU ON/OFF State - also tied to Dimmer LED Level 1 and Blue LED on On/Off Button
+     0
   }
 };
 

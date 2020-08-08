@@ -1455,7 +1455,12 @@ void GpioInit(void)
   }
   else if (MJ_SD01_DIMMER == my_module_type) {
     Settings.flag.mqtt_serial = 0;
-  }    
+  }
+  else if (MJ_SD01_FAN == my_module_type) {
+    Settings.flag.mqtt_serial = 0;
+    digitalWrite(5, HIGH);
+    digitalWrite(3, HIGH);
+  }     
   else if (CH4 == my_module_type) {
     devices_present = 4;
     SetSerial(19200, TS_SERIAL_8N1);
